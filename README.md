@@ -1,3 +1,5 @@
+<img src="icons/icon128.png" alt="" width="128" height="128">
+
 # iKaptchaSolve
 
 Standalone Chrome (MV3) extension that auto-solves Ikariam **piracy** and
@@ -9,7 +11,7 @@ Extracted as a slim subset of [Ikariam Tools](https://github.com/Mahrkeenerh/Ika
 
 ## Install (unpacked)
 
-1. Unzip `ikaptchasolve-v1.0.zip` somewhere permanent.
+1. Download the zip from the [latest release](../../releases/latest) and unzip it somewhere permanent.
 2. Open `chrome://extensions`.
 3. Toggle **Developer mode** on (top-right).
 4. Click **Load unpacked** and select the unzipped folder.
@@ -18,30 +20,5 @@ That's it — open Ikariam and pirate/demolition captchas are filled and submitt
 automatically. (Chrome shows a "disable developer-mode extensions" popup on each
 startup; just dismiss it.)
 
-## How it works
-
-```
-content/content.js   detects captcha in the page DOM, sends the image to →
-background.js        spins up an offscreen document, relays the image to →
-pages/offscreen.html runs ONNX inference (dist/ + model/model.onnx), returns →
-content/content.js   fills #captcha and clicks submit (pirate; up to 5 tries)
-```
-
-- **Pirate captcha** (`img.captchaImage`): solved and auto-submitted.
-- **Demolition captcha** (`#demolitionForm`): solved only — you confirm manually.
-
-## Build / rebuild
-
-`dist/` is checked in already, so the extension loads as-is. To regenerate the
-ONNX runtime bundle:
-
-```bash
-npm install      # esbuild + onnxruntime-web
-npm run build    # bundles src/offscreen.js + copies the CPU-WASM runtime to dist/
-npm run package  # build + zip a release
-```
-
-Only the runtime onnxruntime-web actually imports is shipped —
-`ort-wasm-simd-threaded.jsep.*` (its unified default build, which also serves the
-CPU `executionProviders:["wasm"]` path). The plain/.jspi/.asyncify variants are
-never fetched, keeping the package small.
+- **Pirate captcha**: solved and auto-submitted.
+- **Demolition captcha**: solved only — you confirm manually.
