@@ -1,0 +1,12 @@
+{
+  "name": "ikaptchasolve",
+  "private": true,
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "package": "node esbuild.config.mjs && node package.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.4",
+    "onnxruntime-web": "^1.24.3"
+  }
+}
